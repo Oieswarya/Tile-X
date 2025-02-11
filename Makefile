@@ -1,7 +1,7 @@
 # Variables
 SRC_DIR = src
 BIN_DIR = bin
-TILEX_SCRIPT = tileX.sh  # Keeping the original script name
+TILEX_SCRIPT = tileX.sh  
 HIFIASM_DIR = Hifiasm
 HIFIASM_BIN = $(HIFIASM_DIR)/hifiasm
 #JEM_MAPPER_DIR = JEM-Mapper
