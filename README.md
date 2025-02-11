@@ -61,7 +61,7 @@ The final scaffolds will be located here: `~/Tile-X/Output/Final/finalAssembly.f
 
 
 **Tips:**
-1. On some clusters, you may need to load specific modules before installing dependencies and and then also while running Maptcha.
+1. On some clusters, you may need to load specific modules before installing dependencies and and then also while running Tile-X.
 2. Ensure that you have the appropriate permissions to execute the job script.
 
 Tile-X utilizes the following tools:
