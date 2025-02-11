@@ -4,7 +4,7 @@ print_help() {
     echo ""
     echo "Options:"
     echo "  -lr, --longreads   Path to the long reads input file"
-    echo "  -o, --output       Output directory (default: \$HOME/TileX/Output/)"
+    echo "  -o, --output       Output directory (default: \$HOME/Tile-X/Output/)"
     echo "  -t, --threads      Number of threads to use (default: 16)"
     echo "  -n, --nodes        Number of nodes to use (default: 2)"
     echo "  -p, --processes    Number of processes per node (default: 2)"
