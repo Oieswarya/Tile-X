@@ -55,7 +55,7 @@ This code has been tested on high-performance cluster (HPC) systems with MPI and
 ~/Tile-X/tileX.sh ~/Tile-X/TestInput/CoxiellaBurnetii_longreads.fa
 ```
 
-The final scaffolds will be located here: `~/Tile-X/Output/Final/finalAssembly.fa`, within the Output folder of the Maptcha directory.
+The final scaffolds will be located here: `~/Tile-X/Output/Final/finalAssembly.fa`, within the Output folder of the Tile-X directory.
 
 
 
