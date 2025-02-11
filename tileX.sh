@@ -14,7 +14,7 @@ print_help() {
 }
 
 # Default values
-output_dir="$HOME/TileX/Output/"
+output_dir="$HOME/Tile-X/Output/"
 threads=16
 nodes=2
 processes=2
@@ -98,28 +98,26 @@ fi
 # Calculate the total number of processes
 np=$((nodes * processes))
 # Main processing steps
-chmod +x $HOME/TileX/src/CreateFastaFromLR
-chmod +x $HOME/TileX/src/jem
-$HOME/TileX/src/CreateFastaFromLR "$long_reads_input_file" "$output_dir/lr_leftright.fa" "$output_dir/lr_concat.fa"
+chmod +x $HOME/Tile-X/src/CreateFastaFromLR
+chmod +x $HOME/Tile-X/src/jem
+$HOME/Tile-X/src/CreateFastaFromLR "$long_reads_input_file" "$output_dir/lr_leftright.fa" "$output_dir/lr_concat.fa"
 
 start_time_maptcha=$(date +%s)
-#chmod +x $HOME/Maptcha/src/CreateFastaFromLR
-#chmod +x $HOME/Maptcha/src/jem
-#$HOME/Maptcha/src/CreateFastaFromLR "$long_reads_input_file" "$output_dir/lr_leftright.fa" "$output_dir/lr_concat.fa"
-mpiexec -np $np $HOME/TileX/src/jem -s "$$long_reads_input_file" -q "$output_dir/lr_concat.fa" -a $HOME/TileX/JEM-Mapper/TestInput/ConstantsForLCH/A.txt -b /$HOME/TileX/JEM-Mapper/TestInput/ConstantsForLCH/B.txt -p $HOME/TileX/JEM-Mapper/TestInput/ConstantsForLCH/Prime.txt -r 1000 -n 30
-cd ~/TileX/TestInput/
+
+mpiexec -np $np $HOME/Tile-X/src/jem -s "$$long_reads_input_file" -q "$output_dir/lr_concat.fa" -a $HOME/Tile-X/JEM-Mapper/TestInput/ConstantsForLCH/A.txt -b /$HOME/Tile-X/JEM-Mapper/TestInput/ConstantsForLCH/B.txt -p $HOME/Tile-X/JEM-Mapper/TestInput/ConstantsForLCH/Prime.txt -r 1000 -n 30
+cd ~/Tile-X/TestInput/
 #map_output="$HOME/TileX/TestInput/CLPairs.log"
 rm "$output_dir/lr_leftright.fa" 
 rm "$output_dir/lr_concat.fa"
 
 #$HOME/TileX/bin/GraphConstrWH "$map_output" "$output_dir/graphWH.txt"
 #$HOME/TileX/bin/graphLRID "$map_output" "$output_dir/graphLRID.txt"
-chmod +x $HOME/TileX/src/CreateFolders
-$HOME/TileX/src/CreateFolders "$long_reads_input_file" "$output_dir/Batches/"
+chmod +x $HOME/Tile-X/src/CreateFolders
+$HOME/Tile-X/src/CreateFolders "$long_reads_input_file" "$output_dir/Batches/"
 
 # Job submission
-cd $HOME/Maptcha/Hifiasm/
-chmod +x $HOME/Maptcha/Hifiasm/hifiasm
+cd $HOME/Tile-X/Hifiasm/
+chmod +x $HOME/Tile-X/Hifiasm/hifiasm
 
 input_dir="$output_dir/Batches/"
 mkdir -p "$output_dir/jobScripts/"
@@ -181,8 +179,8 @@ EOF
 #PBS -l mem=120gb
 #PBS -l walltime=06:00:00
 
-cd $HOME/Maptcha/Hifiasm
-chmod +x $HOME/Maptcha/Hifiasm/hifiasm
+cd $HOME/Tile-X/Hifiasm
+chmod +x $HOMETile-X/Hifiasm/hifiasm
 
 EOF
     elif [[ "$cluster" == "SLURM" ]]; then
@@ -192,8 +190,8 @@ EOF
 #SBATCH --mem=120G
 #SBATCH --time=06:00:00
 
-cd $HOME/Maptcha/Hifiasm
-chmod +x $HOME/Maptcha/Hifiasm/hifiasm
+cd $HOME/Tile-X/Hifiasm
+chmod +x $HOME/Tile-X/Hifiasm/hifiasm
 
 EOF
     fi
@@ -207,7 +205,6 @@ EOF
 
         cat >> "$job_script" <<EOF
 start_folder_time=\$(date +%s)
-#$HOME/Maptcha/Hifiasm/hifiasm -o "$folder/$output_file" -t $threads -n1 -a1 -r1 -f0 "$contigs_file" "$long_reads_file" > /dev/null 2>&1
 end_folder_time=\$(date +%s)
 folder_time=\$((end_folder_time - start_folder_time))
 echo "Time taken for folder ${folder_name}: \${folder_time} seconds"
@@ -227,8 +224,8 @@ EOF
     fi
 done
 
-chmod +x $HOME/TileX/src/tileX
-$HOME/TileX/src/tileX "$long_reads_input_file" "$output_dir"
+chmod +x $HOME/Tile-X/src/tileX
+$HOME/Tile-X/src/tileX "$long_reads_input_file" "$output_dir"
 calculate_stats
 #echo "Batched assembly done! "
 # Calculate the total elapsed time for creating and submitting all job scripts
@@ -236,18 +233,16 @@ end_time=$(date +%s)
 elapsed_time=$((end_time - start_time))
 rm -rf "$output_dir/jobScripts/"
 rm -rf "$output_dir/Batches/"
-cd $HOME/TileX/Hifiasm/
-chmod +x $HOME/TileX/Hifiasm/hifiasm
+cd $HOME/Tile-X/Hifiasm/
+chmod +x $HOME/Tile-X/Hifiasm/hifiasm
 # Start the timer
 start_time=$(date +%s)
 mkdir -p "$output_dir/Final/"
-$HOME/TileX/Hifiasm/hifiasm -o "$output_dir/Final/finalAssembly.asm" -t $threads -n1 -a1 -r1 -f0 "$output_dir/commonLR.fasta" > /dev/null 2>&1
+$HOME/Tile-X/Hifiasm/hifiasm -o "$output_dir/Final/finalAssembly.asm" -t $threads -n1 -a1 -r1 -f0 "$output_dir/commonLR.fasta" > /dev/null 2>&1
 awk '/^S/{print ">"$2;print $3}' "$output_dir/Final/finalAssembly.asm.bp.p_ctg.gfa" > "$output_dir/Final/finalAssembly.fa"
 #rm "$output_dir/phase1_2_output.fasta"
 rm "$output_dir/commonLR.fasta"
-#rm "$output_dir/Phase1_2_partialScaff.fa"
-#rm -rf "$output_dir/FastaFilesBatch_8192/"
-#rm -rf "$output_dir/jobScripts/"
+
 calculate_stats() {
     local sum_time=0
     local num_folders=${#time_list[@]}
