@@ -1,7 +1,7 @@
 # Variables
 SRC_DIR = src
 BIN_DIR = bin
-TILEX_SCRIPT = tileX.sh
+TILEX_SCRIPT = tileX.sh  # Keeping the original script name
 HIFIASM_DIR = Hifiasm
 HIFIASM_BIN = $(HIFIASM_DIR)/hifiasm
 #JEM_MAPPER_DIR = JEM-Mapper
@@ -38,16 +38,6 @@ $(GRAPH_LRID_BIN): $(GRAPH_LRID_SRC)
 hifiasm:
 	cd $(HIFIASM_DIR) && make
 
-# Compile JEM-Mapper
-#jem_mapper:
-	#cd $(JEM_MAPPER_DIR) && make ksize=15
-
-# Compile Reordering executables (now in src/ and placed inside bin/)
-reordering:
-	cd $(SRC_DIR) && make clean && make CC=gcc CPP=g++
-
-	mv $(SRC_DIR)/bin/* $(BIN_DIR)/
-	@echo "Reordering executables are now in $(BIN_DIR)"
 
 # Ensure correct permissions and format
 permissions:
@@ -60,9 +50,6 @@ clean:
 	rm -rf $(BIN_DIR)
 	cd $(SRC_DIR) && make clean
 
-# Install necessary Python dependencies (if needed)
-install-dependencies:
-	pip install -r requirements.txt
 
 # Help
 help:
