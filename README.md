@@ -41,7 +41,7 @@ Options:
 -n, --nodes        Number of nodes to use (default: 2)
 -p, --processes    Number of processes per node (default: 2)
 -tile, --module    Tile-X module to use (default: Tile-Far)
-                     Options: Tile-Far (default), Tile-RCM (rcm), Tile-Metis (met), Tile-Grappolo (grap)
+                     Options: Tile-Far (default), Tile-RCM, Tile-Metis, Tile-Grappolo
 -h, --help         Show this help message
 ```
 
