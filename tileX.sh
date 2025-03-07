@@ -9,7 +9,7 @@ print_help() {
     echo "  -n, --nodes        Number of nodes to use (default: 2)"
     echo "  -p, --processes    Number of processes per node (default: 2)"
     echo "  -tile, --module    Tile-X module to use (default: Tile-Far)"
-    echo "                     Options: Tile-Far (default), Tile-RCM (rcm), Tile-Metis (met), Tile-Grappolo (grap)"
+    echo "                     Options: Tile-Far (default), Tile-RCM, Tile-Metis, Tile-Grappolo"
     echo "  -h, --help         Show this help message"
 }
 
