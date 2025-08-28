@@ -8,6 +8,12 @@ Tile-X is a graph-based approach for optimizing long read genome assembly by reo
 2. Multiple Reordering Strategies: Implements standard reordering heuristics like Reverse Cuthill-McKee (RCM) [Tile-RCM], Metis [Tile-Metis], and Grappolo [Tile-Grappolo], as well as a novel Farthest Neighbor [Tile-Far] heuristic for sparsified assembly.
 3. Scalability: Reduces computational overhead and enables efficient assembly of large genomes.
 
+## Citation
+If you use Tile-X in your research, please cite:
+
+Oieswarya Bhowmik, Ananth Kalyanaraman. Tile-X: A vertex reordering approach for scalable long read assembly.
+Proc. 15th RECOMB Satellite Conference on Biological Sequence Analysis (RECOMB-SEQ), 2025.
+
 ### Step-by-Step Guide
 
 1. **Clone the Tile-X Repository:**
